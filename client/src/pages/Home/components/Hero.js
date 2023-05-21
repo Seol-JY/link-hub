@@ -63,7 +63,6 @@ const S = {
     font-size: 4rem;
     line-height: 1.2;
     color: #0a1929;
-    margin-top: 20px;
     margin-bottom: 20px;
     max-width: 500px;
   `,

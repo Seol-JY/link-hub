@@ -1,8 +1,6 @@
-import { Link as RouterLink } from "react-router-dom";
 import styled from "styled-components";
 import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
-import Link from "@mui/joy/Link";
 
 const S = {
   LoginForm: styled.div`
@@ -72,7 +70,7 @@ const SignupForm = () => {
             <S.Description>
               LinkHub 홈페이지에 오신것을 환영합니다!
               <br />
-              로그인하여 LinkHub의 모든 기능을 사용해보세요.
+              회원가입하여 LinkHub의 모든 기능을 사용해보세요.
             </S.Description>
           </S.AlignLeft>
           <Input
@@ -104,8 +102,9 @@ const SignupForm = () => {
             variant="outlined"
           />
           <Button size="lg" style={{ width: "30%", marginBottom: "1rem" }}>
-            회원가입
+            가입하기
           </Button>
+          <p style={{ fontSize: "0.9rem" }}>개인정보는 안전하게 관리됩니다.</p>
         </S.RootWrappper>
       </S.Container>
     </S.LoginForm>

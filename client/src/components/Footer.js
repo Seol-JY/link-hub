@@ -57,7 +57,12 @@ const Footer = () => {
       <S.Container>
         <S.P>Copyright © 2023 SeolJY All rights reserved.</S.P>
         <S.P>
-          <GitHubIcon />
+          <GitHubIcon
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              window.open("https://github.com/Seol-JY/link-hub", "_blank");
+            }}
+          />
         </S.P>
       </S.Container>
     </S.Footer>

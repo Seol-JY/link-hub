@@ -202,7 +202,7 @@ const Header = () => {
                     새 북마크 작성
                   </Button>
                 </S.Li>
-                <S.Li style={{ display: "flex", alignItems: "center" }} onClick={handleClick}>
+                <S.Li style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={handleClick}>
                   <Avatar size="sm" variant="soft">
                     se
                   </Avatar>
