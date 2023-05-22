@@ -1,4 +1,6 @@
+import Trends from "./components/Trends";
+
 const TrendAndRecent = () => {
-  return <div>trendandrecent</div>;
+  return <Trends />;
 };
 export default TrendAndRecent;

@@ -6,7 +6,7 @@ import Search from "./pages/Search/Search";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import TrendAndResent from "./pages/TrendAndRecent/TrendAndResent";
-import Write from "./pages/Post/Write";
+import Write from "./pages/Write/Write";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -26,8 +26,8 @@ const App = () => {
           <Route path="recent" element={<TrendAndResent />} />
           <Route path="write" element={<Write />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </>
   );
 };

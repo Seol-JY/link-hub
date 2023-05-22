@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../assets/svg/Logo.svg";
 import Button from "@mui/joy/Button";
@@ -26,7 +26,6 @@ const S = {
     letter-spacing: 0px;
     width: 100%;
     margin-left: auto;
-    box-sizing: border-box;
     margin-right: auto;
     display: flex;
     -webkit-box-align: center;
@@ -124,7 +123,9 @@ const Header = () => {
   const isLogin = true;
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isWriteMode, setIsWriteMode] = useState(false);
   const open = Boolean(anchorEl);
+  const location = useLocation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -132,6 +133,14 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    if (location.pathname === "/write") {
+      setIsWriteMode(true);
+    } else {
+      setIsWriteMode(false);
+    }
+  }, [location]);
 
   return (
     <S.Header>
@@ -145,63 +154,75 @@ const Header = () => {
           LinkHub
         </S.LogoWrapper>
         <S.NavWrapper>
-          <S.Nav>
-            <S.Ul>
-              <S.Li>
-                <Button
-                  size="sm"
-                  variant="plain"
-                  color="neutral"
-                  onClick={() => {
-                    navigate("/trend");
-                  }}
-                >
-                  트랜딩
-                </Button>
-              </S.Li>
-              <S.Li>
-                <Button
-                  size="sm"
-                  variant="plain"
-                  color="neutral"
-                  onClick={() => {
-                    navigate("/recent");
-                  }}
-                >
-                  최신
-                </Button>
-              </S.Li>
-            </S.Ul>
-          </S.Nav>
+          {isWriteMode ? (
+            ""
+          ) : (
+            <S.Nav>
+              <S.Ul>
+                <S.Li>
+                  <Button
+                    size="sm"
+                    variant="plain"
+                    color="neutral"
+                    onClick={() => {
+                      navigate("/trend");
+                    }}
+                  >
+                    트랜딩
+                  </Button>
+                </S.Li>
+                <S.Li>
+                  <Button
+                    size="sm"
+                    variant="plain"
+                    color="neutral"
+                    onClick={() => {
+                      navigate("/recent");
+                    }}
+                  >
+                    최신
+                  </Button>
+                </S.Li>
+              </S.Ul>
+            </S.Nav>
+          )}
         </S.NavWrapper>
         <S.MenuWrapper>
           <S.Ul>
             <S.Li>
-              <Button
-                size="sm"
-                variant="plain"
-                color="neutral"
-                style={{ marginRight: "4px" }}
-                onClick={() => {
-                  navigate("/search");
-                }}
-              >
-                <SearchIcon />
-              </Button>
+              {isWriteMode ? (
+                ""
+              ) : (
+                <Button
+                  size="sm"
+                  variant="plain"
+                  color="neutral"
+                  style={{ marginRight: "4px" }}
+                  onClick={() => {
+                    navigate("/search");
+                  }}
+                >
+                  <SearchIcon />
+                </Button>
+              )}
             </S.Li>
             {isLogin ? (
               <>
-                <S.Li>
-                  <Button
-                    size="sm"
-                    style={{ marginRight: "12px", borderRadius: "18px" }}
-                    onClick={() => {
-                      navigate("/write");
-                    }}
-                  >
-                    새 북마크 작성
-                  </Button>
-                </S.Li>
+                {isWriteMode ? (
+                  ""
+                ) : (
+                  <S.Li>
+                    <Button
+                      size="sm"
+                      style={{ marginRight: "12px", borderRadius: "18px" }}
+                      onClick={() => {
+                        navigate("/write");
+                      }}
+                    >
+                      새 북마크 작성
+                    </Button>
+                  </S.Li>
+                )}
                 <S.Li style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={handleClick}>
                   <Avatar size="sm" variant="soft">
                     se

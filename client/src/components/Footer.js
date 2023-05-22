@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -51,7 +53,20 @@ const S = {
 };
 
 const Footer = () => {
-  return (
+  const location = useLocation();
+  const [isWriteMode, setIsWriteMode] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/write") {
+      setIsWriteMode(true);
+    } else {
+      setIsWriteMode(false);
+    }
+  }, [location]);
+
+  return isWriteMode ? (
+    ""
+  ) : (
     <S.Footer>
       <S.Hr />
       <S.Container>
