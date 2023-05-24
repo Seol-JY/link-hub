@@ -18,6 +18,7 @@
     }
   },
   "rules": {
+    "react/prop-types": "off",
     "no-nested-ternary": "off",
     "arrow-body-style": "off",
     "react/function-component-definition": ["warn", { "namedComponents": "arrow-function" }],

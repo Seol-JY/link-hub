@@ -60,7 +60,7 @@ const S = {
     box-sizing: inherit;
     margin: 0;
     font-weight: 800;
-    font-size: 4rem;
+    font-size: 3.7rem;
     line-height: 1.2;
     color: #0a1929;
     margin-bottom: 20px;
@@ -80,6 +80,8 @@ const S = {
 
 const Hero = () => {
   const navigate = useNavigate();
+  const isLogin = false;
+
   return (
     <S.Hero>
       <S.Container>
@@ -90,29 +92,37 @@ const Hero = () => {
                 <span style={{ display: "block" }}>세상 간단한</span> 북마크 공유 서비스.{" "}
                 <S.Highlight>LinkHub</S.Highlight>
               </S.H1>
-              <S.Description>
+              <S.Description style={{ marginBottom: "0" }}>
                 당신의 북마크를 공유하고 세상과 함께 나누어 보세요! 다양한 주제와
                 <span style={{ display: "block" }}>관련된 북마크를 찾고 경험을 나누세요.</span>
               </S.Description>
-              <Button
-                size="lg"
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
-                7초만에 시작하기
-                <KeyboardArrowRightIcon style={{ marginLeft: "6px" }} />
-              </Button>
-              <S.Description style={{ marginTop: "15px", marginBottom: "0" }}>
-                계정이 있나요?{" "}
-                <Link
-                  onClick={() => {
-                    navigate("/login");
-                  }}
-                >
-                  로그인하기
-                </Link>
-              </S.Description>
+
+              {isLogin ? (
+                ""
+              ) : (
+                <>
+                  <Button
+                    sx={{ marginTop: "30px" }}
+                    size="lg"
+                    onClick={() => {
+                      navigate("/signup");
+                    }}
+                  >
+                    7초만에 시작하기
+                    <KeyboardArrowRightIcon style={{ marginLeft: "6px" }} />
+                  </Button>
+                  <S.Description style={{ marginTop: "15px", marginBottom: "0" }}>
+                    계정이 있나요?{" "}
+                    <Link
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      로그인하기
+                    </Link>
+                  </S.Description>
+                </>
+              )}
             </S.IntroLayout>
           </S.Wrapper>
           <S.Wrapper>

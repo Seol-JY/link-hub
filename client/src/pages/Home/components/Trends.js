@@ -7,6 +7,7 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import Typography from "@mui/joy/Typography";
 import Divider from "@mui/joy/Divider";
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
 
 const S = {
   Trends: styled.div`
@@ -61,6 +62,7 @@ const S = {
 };
 
 const Trends = () => {
+  const navigate = useNavigate();
   return (
     <S.Trends>
       <S.Container>
@@ -189,7 +191,14 @@ const Trends = () => {
             </Card>
           </Box>
           <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
-            <Button variant="outlined" color="neutral" style={{ marginRight: "4px", borderRadius: "20px" }}>
+            <Button
+              variant="outlined"
+              color="neutral"
+              style={{ marginRight: "4px", borderRadius: "20px" }}
+              onClick={() => {
+                navigate("/trend");
+              }}
+            >
               더보기
               <AddIcon color="disabled" />
             </Button>

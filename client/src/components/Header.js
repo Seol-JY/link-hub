@@ -239,7 +239,7 @@ const Header = () => {
                   style={{ zIndex: "10000" }}
                 >
                   <MenuItem onClick={handleClose}>
-                    내 정보
+                    내 북마크
                     <ListItemDecorator />
                   </MenuItem>
                   <MenuItem onClick={handleClose}>

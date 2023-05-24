@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset};
   *, *::before, *::after {
     box-sizing: border-box;
-		font-family: 'Noto Sans KR', sans-serif;
+		font-family: 'AppleSDGothicNeo', 'Noto Sans KR' !important;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5;
