@@ -33,7 +33,7 @@ const View = () => {
 
   const nameList = ["네이버", "잡코리아", "링크드인 아는사람찾기"];
   const linkList = [
-    "https://www.naver.com/sdfsdfdsfsdf",
+    "https://www.naer.com/sdfsdfdsfsdf",
     "https://www.jobkorea.co.kr/",
     "https://www.linkedin.com/pub/dir/+/+?trk=guest_homepage-basic_guest_nav_menu_people",
   ];

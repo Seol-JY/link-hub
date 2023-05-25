@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import InputForm from "./components/InputForm";
+import Stack from "@mui/joy/Stack";
+import Divider from "@mui/joy/Divider";
+import ContentItem from "../../components/ContentItem";
 
 const S = {
   Search: styled.div`
@@ -28,6 +31,10 @@ const Search = () => {
     <S.Search>
       <S.Container>
         <InputForm />
+        <Stack spacing={1} divider={<Divider />}>
+          <ContentItem />
+          <ContentItem />
+        </Stack>
       </S.Container>
     </S.Search>
   );
