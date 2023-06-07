@@ -8,6 +8,7 @@ import Typography from "@mui/joy/Typography";
 import Divider from "@mui/joy/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
+import DropImage from "../../../assets/img/잡코.png";
 
 const S = {
   Trends: styled.div`
@@ -80,50 +81,7 @@ const Trends = () => {
             <Card variant="outlined" sx={{ width: 320, marginRight: "20px" }}>
               <CardOverflow>
                 <AspectRatio ratio="2">
-                  <img
-                    src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-                    srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                  />
-                </AspectRatio>
-              </CardOverflow>
-              <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
-                개발 유튜버 모음
-              </Typography>
-              <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-                요즘 즐겨보는 개발 유튜버 모음입니다!
-              </Typography>
-              <Divider />
-              <CardOverflow
-                variant="soft"
-                sx={{
-                  display: "flex",
-                  gap: 1.5,
-                  py: 1.5,
-                  px: "var(--Card-padding)",
-                  bgcolor: "background.level1",
-                }}
-              >
-                <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-                  6.3k views
-                </Typography>
-                <Divider orientation="vertical" />
-                <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-                  1 hour ago
-                </Typography>
-              </CardOverflow>
-            </Card>
-
-            <Card variant="outlined" sx={{ width: 320, marginRight: "20px" }}>
-              <CardOverflow>
-                <AspectRatio ratio="2">
-                  <img
-                    src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-                    srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                  />
+                  <img src={DropImage} loading="lazy" alt="" />
                 </AspectRatio>
               </CardOverflow>
               <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
@@ -131,43 +89,6 @@ const Trends = () => {
               </Typography>
               <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
                 국내 쇼핑몰 모음이에요.
-              </Typography>
-              <Divider />
-              <CardOverflow
-                variant="soft"
-                sx={{
-                  display: "flex",
-                  gap: 1.5,
-                  py: 1.5,
-                  px: "var(--Card-padding)",
-                  bgcolor: "background.level1",
-                }}
-              >
-                <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-                  6.3k views
-                </Typography>
-                <Divider orientation="vertical" />
-                <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-                  1 hour ago
-                </Typography>
-              </CardOverflow>
-            </Card>
-            <Card variant="outlined" sx={{ width: 320, marginRight: "20px" }}>
-              <CardOverflow>
-                <AspectRatio ratio="2">
-                  <img
-                    src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-                    srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                  />
-                </AspectRatio>
-              </CardOverflow>
-              <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
-                구직 관련 사이트
-              </Typography>
-              <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-                제가 취준할때 도움 받았던 사이트 모음이에요~!
               </Typography>
               <Divider />
               <CardOverflow

@@ -1,0 +1,60 @@
+DROP DATABASE IF EXISTS linkhubdb;
+
+CREATE DATABASE IF NOT EXISTS linkhubdb 
+  DEFAULT CHARACTER SET utf8mb4 
+  DEFAULT COLLATE utf8mb4_general_ci;
+
+USE linkhubdb;
+
+-- users 테이블
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  email VARCHAR(255) NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  CONSTRAINT unique_email UNIQUE (email)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- bookmark 테이블
+CREATE TABLE bookmark (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  users_id INT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  title VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- bookmark_image 테이블
+CREATE TABLE bookmark_image (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  bookmark_id INT,
+  img LONGBLOB,
+  FOREIGN KEY (bookmark_id) REFERENCES bookmark (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- link 테이블
+CREATE TABLE link (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  bookmark_id INT,
+  description VARCHAR(255) NOT NULL,
+  link VARCHAR(255) NOT NULL,
+  FOREIGN KEY (bookmark_id) REFERENCES bookmark (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- bookmark_view 테이블
+CREATE TABLE bookmark_view (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  bookmark_id INT,
+  view_count INT DEFAULT 0,
+  FOREIGN KEY (bookmark_id) REFERENCES bookmark (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;

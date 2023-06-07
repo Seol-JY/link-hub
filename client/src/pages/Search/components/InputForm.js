@@ -10,7 +10,7 @@ const S = {
   Description: styled.p`
     -webkit-font-smoothing: antialiased;
     box-sizing: inherit;
-    margin-bottom: 4rem;
+    margin-bottom: 0.2rem;
     font-size: 1.125rem;
     line-height: 1.5;
     padding-left: 2px;

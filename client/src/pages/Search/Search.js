@@ -31,7 +31,7 @@ const Search = () => {
     <S.Search>
       <S.Container>
         <InputForm />
-        <Stack spacing={1} divider={<Divider />}>
+        <Stack spacing={0.3} divider={<Divider />}>
           <ContentItem />
           <ContentItem />
         </Stack>
