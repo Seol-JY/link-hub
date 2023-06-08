@@ -259,6 +259,7 @@ const Header = () => {
                 >
                   <MenuItem
                     onClick={() => {
+                      handleClose();
                       navigate(`/@${username}`);
                     }}
                   >

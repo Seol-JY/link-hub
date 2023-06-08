@@ -6,10 +6,11 @@ import Input from "@mui/joy/Input";
 import Divider from "@mui/joy/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import Textarea from "@mui/joy/Textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DropImage from "../../../assets/img/drop_image.png";
 import LinkIcon from "@mui/icons-material/Link";
 import NotesIcon from "@mui/icons-material/Notes";
+import axios from "axios";
 
 const S = {
   Editor: styled.div`
@@ -32,10 +33,21 @@ const S = {
     max-width: 800px;
   `,
 };
-
-const Editor = () => {
+const Editor = ({ doSubmit, setDoSubmit }) => {
   const [preview, setPreview] = useState(DropImage);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [items, setItems] = useState([
+    {
+      description: "", // 첫 번째 아이템에만 placeholder 적용
+      uri: "",
+    },
+    {
+      description: "",
+      uri: "",
+    },
+  ]);
 
   const onDrop = (acceptedFiles) => {
     const reader = new FileReader();
@@ -61,19 +73,73 @@ const Editor = () => {
     onDrop,
   });
 
-  const handleImageChange = (e) => {
-    const { name, value } = e.target;
+  const handleAddItem = () => {
+    // 새로운 아이템 생성
+    const newItem = {
+      description: "",
+      uri: "",
+    };
 
-    // 이 부분을 추가
-    if (e.target.name === "imageurl") {
-      setPreview(e.target.value);
-    }
+    // 아이템 배열에 새로운 아이템 추가
+    setItems((prevItems) => [...prevItems, newItem]);
   };
+
+  const handleInputChange = (index, field, value) => {
+    setItems((prevItems) => {
+      const updatedItems = [...prevItems];
+      updatedItems[index][field] = value;
+      return updatedItems;
+    });
+  };
+
+  const handleSubmit = () => {
+    const formData = new FormData();
+
+    // 이미지 추가
+    if (image) {
+      formData.append("image", image);
+    }
+
+    // 데이터 추가
+    const data = {
+      title,
+      description,
+      link: items.map((item) => ({
+        description: item.description,
+        url: item.uri,
+      })),
+    };
+    formData.append("data", JSON.stringify(data));
+
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+    axios
+      .post("http://localhost:8080/api/post", formData, { withCredentials: true })
+      .then((res) => {
+        console.log(res.data.success);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    if (doSubmit) {
+      handleSubmit();
+      setDoSubmit(false);
+    }
+  }, [doSubmit]);
 
   return (
     <S.Editor>
       <S.Container>
         <Input
+          name="title"
           color="neutral"
           size="lg"
           placeholder="제목을 입력하세요"
@@ -87,6 +153,10 @@ const Editor = () => {
             height: "3.7rem",
             "--Input-focusedHighlight": "none",
           }}
+          value={title}
+          onChange={(e) => {
+            setTitle(e.currentTarget.value);
+          }}
         />
         <Divider orientation="horizontal" sx={{ marginBottom: "10px" }} />
         <div {...getRootProps()}>
@@ -95,80 +165,51 @@ const Editor = () => {
         <input {...getInputProps()} multiple={false} name="imageurl" />
 
         <Textarea
+          name="description"
           required
           color="neutral"
           variant="plain"
           placeholder="북마크에 대한 설명을 입력하세요"
           minRows={11}
+          value={description}
+          onChange={(e) => {
+            setDescription(e.currentTarget.value);
+          }}
           sx={{ marginTop: "10px", marginBottom: "20px", borderRadius: "0", "--Textarea-focusedHighlight": "none" }}
         />
 
         <Stack spacing={1} divider={<Divider />}>
-          <div style={{ display: "flex", flexDirection: "col" }}>
-            <Input
-              size="lg"
-              variant="plain"
-              placeholder="설명"
-              sx={{
-                flexGrow: "1",
-                marginRight: "10px",
-                "--Input-focusedHighlight": "#B9B9C6",
-                "--Input-focusedThickness": "0.5px",
-              }}
-              startDecorator={<NotesIcon fontSize="small" />}
-            />
-            <Input
-              size="lg"
-              variant="plain"
-              placeholder="URI"
-              sx={{ flexGrow: "10", "--Input-focusedHighlight": "#B9B9C6", "--Input-focusedThickness": "0.5px" }}
-              startDecorator={<LinkIcon fontSize="small" />}
-            />
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "col" }}>
-            <Input
-              size="lg"
-              variant="plain"
-              sx={{
-                flexGrow: "1",
-                marginRight: "10px",
-                "--Input-focusedHighlight": "#B9B9C6",
-                "--Input-focusedThickness": "0.5px",
-              }}
-              startDecorator={<NotesIcon fontSize="small" />}
-            />
-            <Input
-              size="lg"
-              variant="plain"
-              sx={{ flexGrow: "10", "--Input-focusedHighlight": "#B9B9C6", "--Input-focusedThickness": "0.5px" }}
-              startDecorator={<LinkIcon fontSize="small" />}
-            />
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "col" }}>
-            <Input
-              size="lg"
-              variant="plain"
-              sx={{
-                flexGrow: "1",
-                marginRight: "10px",
-                "--Input-focusedHighlight": "#B9B9C6",
-                "--Input-focusedThickness": "0.5px",
-              }}
-              startDecorator={<NotesIcon fontSize="small" />}
-            />
-            <Input
-              size="lg"
-              variant="plain"
-              sx={{ flexGrow: "10", "--Input-focusedHighlight": "#B9B9C6", "--Input-focusedThickness": "0.5px" }}
-              startDecorator={<LinkIcon fontSize="small" />}
-            />
-          </div>
+          {items.map((item, index) => (
+            <div key={index} style={{ display: "flex", flexDirection: "col" }}>
+              <Input
+                size="lg"
+                variant="plain"
+                placeholder={index === 0 ? "설명" : ""}
+                sx={{
+                  flexGrow: "1",
+                  marginRight: "10px",
+                  "--Input-focusedHighlight": "#B9B9C6",
+                  "--Input-focusedThickness": "0.5px",
+                }}
+                startDecorator={<NotesIcon fontSize="small" />}
+                value={item.description}
+                onChange={(e) => handleInputChange(index, "description", e.target.value)}
+              />
+              <Input
+                size="lg"
+                variant="plain"
+                placeholder="URI"
+                sx={{ flexGrow: "10", "--Input-focusedHighlight": "#B9B9C6", "--Input-focusedThickness": "0.5px" }}
+                startDecorator={<LinkIcon fontSize="small" />}
+                value={item.uri}
+                onChange={(e) => handleInputChange(index, "uri", e.target.value)}
+              />
+            </div>
+          ))}
         </Stack>
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "25px", marginBottom: "70px" }}>
-          <Button color="neutral" size="sm" style={{ borderRadius: "20px" }}>
+          <Button color="neutral" size="sm" style={{ borderRadius: "20px" }} onClick={handleAddItem}>
             추가
             <AddIcon fontSize="small" />
           </Button>

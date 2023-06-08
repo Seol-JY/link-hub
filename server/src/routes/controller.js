@@ -1,4 +1,5 @@
 const UserModel = require("../model/User");
+const PostModel = require("../model/Post");
 
 const User = {
   login: async (req, res) => {
@@ -78,6 +79,22 @@ const User = {
   },
 };
 
+const Post = {
+  savePost: (req, res) => {
+    PostModel.createPost(req)
+      .then((data) => {
+        res.json({ success: true, message: "create success", data });
+      })
+      .catch((reson) => {
+        console.error(reson);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      });
+  },
+};
+
 module.exports = {
   User,
+  Post,
 };

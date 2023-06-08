@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "@mui/joy/Button/Button";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const S = {
   ContentAside: styled.div`
@@ -35,7 +36,8 @@ const S = {
   `,
 };
 
-const ContentAside = () => {
+const ContentAside = ({ setDoSubmit }) => {
+  const navigate = useNavigate();
   return (
     <S.ContentAside>
       <S.Container>
@@ -45,10 +47,21 @@ const ContentAside = () => {
           sx={{ borderRadius: "20px" }}
           startDecorator={"  "}
           endDecorator={"  "}
+          onClick={() => {
+            navigate("/");
+          }}
         >
           작성 취소
         </Button>
-        <Button color="neutral" sx={{ borderRadius: "20px" }} startDecorator={"  "} endDecorator={"  "}>
+        <Button
+          color="neutral"
+          sx={{ borderRadius: "20px" }}
+          startDecorator={"  "}
+          endDecorator={"  "}
+          onClick={() => {
+            setDoSubmit(true);
+          }}
+        >
           작성 완료
         </Button>
       </S.Container>
