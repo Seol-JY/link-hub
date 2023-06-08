@@ -43,7 +43,24 @@ const User = {
   },
 
   validate: (req, res) => {
-    res.json({ success: true, message: "validate success" });
+    if (req.session.userId) {
+      UserModel.getUserInfoWithId(req.session.userId)
+        .then((data) => {
+          res.json({ success: true, message: "validate success", data });
+        })
+        .catch((reson) => {
+          console.error(reson);
+          if (reson === "Invalid") {
+            res.status(404).json({ success: false, message: reson });
+          } else {
+            res
+              .status(500)
+              .json({ success: false, message: "Internal server error" });
+          }
+        });
+    } else {
+      res.json({ success: false, message: "validate fail" });
+    }
   },
 
   logout: (req, res) => {

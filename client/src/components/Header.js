@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../assets/svg/Logo.svg";
@@ -120,10 +121,12 @@ const S = {
 };
 
 const Header = () => {
-  const isLogin = true;
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isWriteMode, setIsWriteMode] = useState(false);
+  const [username, setUsername] = useState(null);
+
   const open = Boolean(anchorEl);
   const location = useLocation();
 
@@ -133,6 +136,22 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/validate`, {
+        withCredentials: true, // 쿠키 전달을 위한 옵션 설정
+      })
+      .then((res) => {
+        if (res.data.success) {
+          setIsLogin(true);
+          setUsername(res.data.data.username);
+        }
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+      });
+  }, []);
 
   useEffect(() => {
     if (location.pathname === "/write") {
@@ -225,7 +244,7 @@ const Header = () => {
                 )}
                 <S.Li style={{ display: "flex", alignItems: "center", cursor: "pointer" }} onClick={handleClick}>
                   <Avatar size="sm" variant="soft">
-                    se
+                    {username.substring(0, /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(username[0]) ? 1 : 2)}
                   </Avatar>
                   <ArrowDropDownIcon />
                 </S.Li>
@@ -238,11 +257,28 @@ const Header = () => {
                   placement="bottom-end"
                   style={{ zIndex: "10000" }}
                 >
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => {
+                      navigate(`/@${username}`);
+                    }}
+                  >
                     내 북마크
                     <ListItemDecorator />
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => {
+                      axios
+                        .post(`http://localhost:8080/api/logout`, {}, { withCredentials: true })
+                        .then((res) => {
+                          if (res.data.success) {
+                            window.location.reload();
+                          }
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
+                  >
                     로그아웃
                     <ListItemDecorator />
                   </MenuItem>

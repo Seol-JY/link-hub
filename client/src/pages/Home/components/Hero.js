@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ReactComponent as HeroImg } from "../../../assets/svg/Hero.svg";
+import axios from "axios";
 
 const S = {
   Hero: styled.div`
@@ -80,7 +82,22 @@ const S = {
 
 const Hero = () => {
   const navigate = useNavigate();
-  const isLogin = false;
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/validate`, {
+        withCredentials: true, // 쿠키 전달을 위한 옵션 설정
+      })
+      .then((res) => {
+        if (res.data.success) {
+          setIsLogin(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <S.Hero>

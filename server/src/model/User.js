@@ -12,6 +12,17 @@ const User = {
     });
   },
 
+  getUserInfoWithId: async (userId) => {
+    return new Promise((resolve, reject) => {
+      const query = "SELECT email, username FROM users WHERE id = ?";
+      db.query(query, [userId], (err, data) => {
+        if (err) reject(err);
+        if (data.length === 0) reject("Invalid");
+        resolve(data[0]);
+      });
+    });
+  },
+
   setUserInfo: async (email, username, password) => {
     return new Promise((resolve, reject) => {
       // 이메일 중복 여부 확인

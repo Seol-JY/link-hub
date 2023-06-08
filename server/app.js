@@ -9,14 +9,19 @@ const routes = require("./src/routes");
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(
   session({
     secret: "seol",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
   })
 );
