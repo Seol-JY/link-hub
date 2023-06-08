@@ -7,10 +7,11 @@ const bodyParser = require("body-parser");
 const routes = require("./src/routes");
 
 const app = express();
+const port = 3000;
 
 app.use(
   cors({
-    origin: "http://localhost",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
