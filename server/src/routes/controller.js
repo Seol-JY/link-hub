@@ -92,6 +92,22 @@ const Post = {
           .json({ success: false, message: "Internal server error" });
       });
   },
+  getPost: (req, res) => {
+    PostModel.getPost(req)
+      .then((data) => {
+        res.json(data); // TODO: 해결
+      })
+      .catch((reson) => {
+        if (reson === "No Exist") {
+          res.status(404).json({ success: false, message: reson });
+        } else {
+          console.error(reson);
+          res
+            .status(500)
+            .json({ success: false, message: "Internal server error" });
+        }
+      });
+  },
 };
 
 module.exports = {

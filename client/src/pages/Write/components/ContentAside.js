@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "@mui/joy/Button/Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const S = {
   ContentAside: styled.div`

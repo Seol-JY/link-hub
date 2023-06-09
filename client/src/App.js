@@ -42,7 +42,7 @@ const App = () => {
               <Route path="trend" element={<TrendAndResent />} />
               <Route path="recent" element={<TrendAndResent />} />
               <Route path="write" element={<Write />} />
-              <Route path=":user/:postTitle" element={<Post />} />
+              <Route path=":user/:postId" element={<Post />} />
             </Routes>
             <Footer />
           </BrowserRouter>

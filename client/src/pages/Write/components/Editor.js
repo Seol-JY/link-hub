@@ -11,6 +11,7 @@ import DropImage from "../../../assets/img/drop_image.png";
 import LinkIcon from "@mui/icons-material/Link";
 import NotesIcon from "@mui/icons-material/Notes";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const S = {
   Editor: styled.div`
@@ -34,6 +35,7 @@ const S = {
   `,
 };
 const Editor = ({ doSubmit, setDoSubmit }) => {
+  const navigate = useNavigate();
   const [preview, setPreview] = useState(DropImage);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -109,19 +111,23 @@ const Editor = ({ doSubmit, setDoSubmit }) => {
         url: item.uri,
       })),
     };
+
     formData.append("data", JSON.stringify(data));
 
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
 
-    for (let value of formData.values()) {
-      console.log(value);
-    }
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+
     axios
       .post("http://localhost:8080/api/post", formData, { withCredentials: true })
       .then((res) => {
-        console.log(res.data.success);
+        if (res.data.success) {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.error(error);

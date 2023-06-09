@@ -3,12 +3,25 @@ import Button from "@mui/joy/Button";
 import Avatar from "@mui/joy/Avatar";
 import Tooltip from "@mui/joy/Tooltip";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useState, useEffect } from "react";
 
 const LinkItem = ({ description, link }) => {
-  const url = new URL(link);
-  const faviconLink = `${url.protocol}//${url.hostname}/favicon.ico`;
+  const [willRender, setWillRender] = useState(false);
 
-  return (
+  const [url, setUrl] = useState("");
+  const [faviconLink, setFaviconLink] = useState("");
+
+  useEffect(() => {
+    try {
+      setUrl(new URL(link));
+      setFaviconLink(`${url.protocol}//${url.hostname}/favicon.ico`);
+      setWillRender(true);
+    } catch (e) {
+      setWillRender(false);
+    }
+  }, [faviconLink]);
+
+  return willRender ? (
     <div style={{ display: "flex", minHeight: "3.7rem" }}>
       <Button
         size="lg"
@@ -59,6 +72,8 @@ const LinkItem = ({ description, link }) => {
         </Tooltip>
       </CopyToClipboard>
     </div>
+  ) : (
+    ""
   );
 };
 

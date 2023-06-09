@@ -19,4 +19,6 @@ router.post(
   controller.Post.savePost
 );
 
+router.get("/post", controller.Post.getPost);
+
 module.exports = router;
