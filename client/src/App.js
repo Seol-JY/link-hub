@@ -11,7 +11,7 @@ import Signup from "./pages/Signup/Signup";
 import TrendAndResent from "./pages/TrendAndRecent/TrendAndResent";
 import Write from "./pages/Write/Write";
 import Post from "./pages/Post/Post";
-
+import UserPost from "./pages/UserPost/UserPost";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -42,6 +42,7 @@ const App = () => {
               <Route path="trend" element={<TrendAndResent />} />
               <Route path="recent" element={<TrendAndResent />} />
               <Route path="write" element={<Write />} />
+              <Route path=":user" element={<UserPost />} />
               <Route path=":user/:postId" element={<Post />} />
             </Routes>
             <Footer />

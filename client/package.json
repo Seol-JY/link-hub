@@ -10,6 +10,7 @@
     "@mui/joy": "^5.0.0-alpha.80",
     "@mui/material": "^5.13.1",
     "axios": "^1.4.0",
+    "moment": "^2.29.4",
     "prettier": "^2.8.8",
     "query-string": "^8.1.0",
     "react": "^18.2.0",

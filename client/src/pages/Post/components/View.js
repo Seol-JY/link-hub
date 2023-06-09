@@ -1,9 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
 import styled from "styled-components";
 import Divider from "@mui/joy/Divider";
-import { useEffect, useState } from "react";
 import LinkItem from "./LinkItem";
+import useRelativeTime from "../../../hooks/useRelativeTime";
 
 const S = {
   Editor: styled.div`
@@ -28,6 +29,9 @@ const S = {
 };
 
 const View = ({ resData }) => {
+  const relativeTime = useRelativeTime(resData.data.created_at);
+  const navigate = useNavigate();
+
   return (
     <S.Editor>
       <S.Container>
@@ -44,13 +48,19 @@ const View = ({ resData }) => {
           {resData.data.title}
         </Typography>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography level="body1" sx={{ paddingLeft: "0.4rem" }}>
-            <b style={{ fontWeight: "600" }}>{resData.data.username}</b> · 하루 전
+          <Typography
+            level="body1"
+            sx={{ paddingLeft: "0.4rem" }}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate(`/@${resData.data.username}`);
+            }}
+          >
+            <b style={{ fontWeight: "600" }}>{resData.data.username}</b> · {relativeTime}
           </Typography>
 
           <Typography level="body1" sx={{ paddingLeft: "0.4rem" }}>
-            조회수
-            {resData.data.view_count}회
+            조회수 {resData.data.view_count}회
           </Typography>
         </div>
         {resData.data.img && (
@@ -68,7 +78,7 @@ const View = ({ resData }) => {
           {resData.data.links.map((item, i) => (
             <LinkItem key={i} description={item.linkDescription} link={item.link} />
           ))}
-        </Stack>{" "}
+        </Stack>
       </S.Container>
     </S.Editor>
   );

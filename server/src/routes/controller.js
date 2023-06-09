@@ -95,7 +95,7 @@ const Post = {
   getPost: (req, res) => {
     PostModel.getPost(req)
       .then((data) => {
-        res.json(data); // TODO: 해결
+        res.json(data);
       })
       .catch((reson) => {
         if (reson === "No Exist") {
@@ -106,6 +106,56 @@ const Post = {
             .status(500)
             .json({ success: false, message: "Internal server error" });
         }
+      });
+  },
+  getPostWithSearch: (req, res) => {
+    PostModel.getPostWithSearch(req)
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((reson) => {
+        console.error(reson);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      });
+  },
+  getPostWithUser: (req, res) => {
+    PostModel.getPostWithUser(req)
+      .then((data) => {
+        res.json(data); // TODO: 해결
+      })
+      .catch((reson) => {
+        console.error(reson);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      });
+  },
+
+  getTrend: (req, res) => {
+    PostModel.getTrend(req)
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((reson) => {
+        console.error(reson);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
+      });
+  },
+
+  getRecent: (req, res) => {
+    PostModel.getRecent(req)
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((reson) => {
+        console.error(reson);
+        res
+          .status(500)
+          .json({ success: false, message: "Internal server error" });
       });
   },
 };

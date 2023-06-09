@@ -149,7 +149,7 @@ const Header = () => {
         }
       })
       .catch((err) => {
-        console.log(err.response.status);
+        console.log(err);
       });
   }, []);
 

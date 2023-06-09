@@ -1,14 +1,10 @@
 import styled from "styled-components";
-import Box from "@mui/joy/Box";
+import { useState, useEffect } from "react";
 import Button from "@mui/joy/Button";
-import Card from "@mui/joy/Card";
-import CardOverflow from "@mui/joy/CardOverflow";
-import AspectRatio from "@mui/joy/AspectRatio";
-import Typography from "@mui/joy/Typography";
-import Divider from "@mui/joy/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
-import DropImage from "../../../assets/img/잡코.png";
+import axios from "axios";
+import MinContentItem from "../../../components/MinContentItem";
 
 const S = {
   Trends: styled.div`
@@ -64,53 +60,60 @@ const S = {
 
 const Trends = () => {
   const navigate = useNavigate();
+  const [opt, setOpt] = useState("trend");
+
+  const [resData, setResData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/${opt}`)
+      .then((res) => {
+        setResData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [opt]);
+
   return (
     <S.Trends>
       <S.Container>
         <S.RootWrappper>
           <S.Title> 요즘 뜨는 북마크 🔥</S.Title>
           <div>
-            <Button variant="solid" color="neutral" style={{ marginRight: "8px", borderRadius: "20px" }}>
+            <Button
+              variant={opt === "trend" ? "solid" : "outlined"}
+              color="neutral"
+              style={{ marginRight: "8px", borderRadius: "20px" }}
+              onClick={() => {
+                setOpt("trend");
+              }}
+            >
               인기 순
             </Button>
-            <Button variant="outlined" color="neutral" style={{ marginRight: "4px", borderRadius: "20px" }}>
+            <Button
+              variant={opt === "recent" ? "solid" : "outlined"}
+              color="neutral"
+              style={{ marginRight: "4px", borderRadius: "20px" }}
+              onClick={() => {
+                setOpt("recent");
+              }}
+            >
               최신 순
             </Button>
           </div>
-          <Box style={{ display: "flex", flexDirection: "row", marginTop: "15px", paddingBottom: "20px" }}>
-            <Card variant="outlined" sx={{ width: 320, marginRight: "20px" }}>
-              <CardOverflow>
-                <AspectRatio ratio="2">
-                  <img src={DropImage} loading="lazy" alt="" />
-                </AspectRatio>
-              </CardOverflow>
-              <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
-                쇼핑몰 사이트 모음
-              </Typography>
-              <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-                국내 쇼핑몰 모음이에요.
-              </Typography>
-              <Divider />
-              <CardOverflow
-                variant="soft"
-                sx={{
-                  display: "flex",
-                  gap: 1.5,
-                  py: 1.5,
-                  px: "var(--Card-padding)",
-                  bgcolor: "background.level1",
-                }}
-              >
-                <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-                  6.3k views
-                </Typography>
-                <Divider orientation="vertical" />
-                <Typography level="body3" sx={{ fontWeight: "md", color: "text.secondary" }}>
-                  1 hour ago
-                </Typography>
-              </CardOverflow>
-            </Card>
-          </Box>
+
+          <div
+            style={{
+              display: "flex",
+              marginTop: "15px",
+              marginBottom: "3rem",
+              flexWrap: "wrap",
+            }}
+          >
+            {resData && resData.map((RD) => <MinContentItem key={RD.bookmarkId} data={RD} />)}
+          </div>
+
           <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
             <Button
               variant="outlined"

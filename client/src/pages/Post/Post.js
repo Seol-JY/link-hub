@@ -1,6 +1,6 @@
 import View from "./components/View";
 import { useState, useEffect } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const Post = () => {
@@ -31,6 +31,6 @@ const Post = () => {
     }
   }, []);
 
-  return loadStatus === "loaded" ? <View resData={resData} /> : loadStatus ? <div>404</div> : "";
+  return loadStatus === "loaded" ? <View resData={resData} /> : loadStatus === "error" ? <div>404</div> : "";
 };
 export default Post;

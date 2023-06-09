@@ -114,14 +114,6 @@ const Editor = ({ doSubmit, setDoSubmit }) => {
 
     formData.append("data", JSON.stringify(data));
 
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
-
     axios
       .post("http://localhost:8080/api/post", formData, { withCredentials: true })
       .then((res) => {

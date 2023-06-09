@@ -20,5 +20,10 @@ router.post(
 );
 
 router.get("/post", controller.Post.getPost);
+router.get("/search", controller.Post.getPostWithSearch);
+router.get("/search/user", controller.Post.getPostWithUser);
+
+router.get("/recent", controller.Post.getRecent);
+router.get("/trend", controller.Post.getTrend);
 
 module.exports = router;

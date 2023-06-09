@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import InputForm from "./components/InputForm";
 import Stack from "@mui/joy/Stack";
 import Divider from "@mui/joy/Divider";
 import ContentItem from "../../components/ContentItem";
 
 const S = {
-  Search: styled.div`
+  UserPost: styled.div`
     margin-top: 4rem;
     letter-spacing: 0;
     box-sizing: inherit;
@@ -29,34 +28,37 @@ const S = {
   `,
 };
 
-const Search = () => {
-  const [searchParams] = useSearchParams();
-  const q = searchParams.get("q");
+const UserPost = () => {
+  const { user } = useParams();
+  const navigate = useNavigate();
+  const formattedUser = user.startsWith("@") ? user.slice(1) : null;
 
   const [resData, setResData] = useState(null);
 
   useEffect(() => {
-    if (q !== "" && q !== null)
+    if (formattedUser !== null) {
       axios
-        .get(`http://localhost:8080/api/search/?q=${q}`)
+        .get(`http://localhost:8080/api/search/user/?q=${formattedUser}`)
         .then((res) => {
           setResData(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-  }, [q]);
+    } else {
+      navigate("/");
+    }
+  }, [formattedUser]);
 
   return (
-    <S.Search>
+    <S.UserPost>
       <S.Container>
-        <InputForm resData={resData} />
         <Stack spacing={0.3} divider={<Divider />}>
           {resData && resData.map((RD) => <ContentItem key={RD.bookmarkId} data={RD} />)}
         </Stack>
       </S.Container>
-    </S.Search>
+    </S.UserPost>
   );
 };
 
-export default Search;
+export default UserPost;

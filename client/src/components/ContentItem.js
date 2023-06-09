@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import AspectRatio from "@mui/joy/AspectRatio";
-import DropImage from "../assets/img/잡코.png";
 import Typography from "@mui/joy/Typography";
 import Chip from "@mui/joy/Chip";
 import Stack from "@mui/joy/Stack";
+import useRelativeTime from "../hooks/useRelativeTime";
 
 const S = {
   Wrapper: styled.div`
@@ -15,11 +16,20 @@ const S = {
   `,
 };
 
-const contentItem = () => {
+const ContentItem = ({ data }) => {
+  const navigate = useNavigate();
+  const relativeTime = useRelativeTime(data.created_at);
+
   return (
-    <S.Wrapper style={{ cursor: "pointer" }} onClick={() => {}}>
-      <AspectRatio objectFit="cover">
-        <img src={DropImage} alt="exp" />
+    <S.Wrapper>
+      <AspectRatio
+        objectFit="cover"
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          navigate(`/@${data.username}/${data.bookmarkId}`);
+        }}
+      >
+        <img src={`data:image/jpeg;base64,${data.img}`} alt="exp" />
       </AspectRatio>
       <Stack spacing={1.2} sx={{ marginTop: "20px" }}>
         <Typography
@@ -27,8 +37,12 @@ const contentItem = () => {
           sx={{
             fontWeight: "700",
           }}
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate(`/@${data.username}/${data.bookmarkId}`);
+          }}
         >
-          취업 준비 사이트 모음
+          {data.title}
         </Typography>
         <Typography
           level="body1"
@@ -42,27 +56,33 @@ const contentItem = () => {
             textOverflow: "ellipsis",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: "2",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            navigate(`/@${data.username}/${data.bookmarkId}`);
           }}
         >
-          제가 취업할때 참고했던 사이트들이에요~!!
+          {data.description}
         </Typography>
         <div style={{ marginTop: "1.5rem" }}>
-          <Chip color="primary" sx={{ marginRight: "7px" }} variant="soft">
-            네이버
-          </Chip>
-          <Chip color="primary" sx={{ marginRight: "7px" }} variant="soft">
-            잡코리아
-          </Chip>
-          <Chip color="primary" sx={{ marginRight: "7px" }} variant="soft">
-            링크드인 아는사람
-          </Chip>
+          {data.links.map((item, index) => (
+            <Chip key={index} color="primary" sx={{ marginRight: "7px" }} variant="soft">
+              {item}
+            </Chip>
+          ))}
         </div>
-        <Typography level="body1">
-          <b style={{ fontWeight: "600" }}>seoljy</b> · 하루 전
+        <Typography
+          level="body1"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate(`/@${data.username}`);
+          }}
+        >
+          <b style={{ fontWeight: "600" }}>{data.username}</b> · {relativeTime}
         </Typography>
       </Stack>
     </S.Wrapper>
   );
 };
 
-export default contentItem;
+export default ContentItem;

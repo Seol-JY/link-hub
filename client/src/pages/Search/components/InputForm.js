@@ -17,7 +17,7 @@ const S = {
   `,
 };
 
-const InputForm = () => {
+const InputForm = ({ resData }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -82,9 +82,9 @@ const InputForm = () => {
         }}
         onKeyDown={handleKeyDown}
       />
-      {description ? (
+      {description && resData ? (
         <S.Description>
-          총 <b style={{ fontWeight: "600" }}>321개</b>의 북마크를 찾았어요.
+          총 <b style={{ fontWeight: "600" }}>{resData.length}개</b>의 북마크를 찾았어요.
         </S.Description>
       ) : (
         ""
