@@ -21,14 +21,13 @@ const S = {
     margin-right: auto;
     display: block;
     min-height: 600px;
-    height: calc(100vh - 500px);
     transition: 0.3s;
     padding-left: 30px;
     padding-right: 30px;
     max-width: 1200px;
-    max-height: 1000px;
   `,
   RootWrappper: styled.div`
+    padding: 4rem 0 4rem 0;
     letter-spacing: 0;
     box-sizing: border-box;
     display: flex;
@@ -40,7 +39,6 @@ const S = {
     height: 100%;
     margin-left: auto;
     margin-right: auto;
-
     justify-content: center;
   `,
 
@@ -66,7 +64,7 @@ const Trends = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${opt}`)
+      .get(`http://localhost:8080/api/${opt}/?limit=3`)
       .then((res) => {
         setResData(res.data);
       })
