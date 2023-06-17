@@ -1,3 +1,4 @@
+// header 구성
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -138,6 +139,7 @@ const Header = () => {
   };
 
   useEffect(() => {
+    // 로그인 여부 확인을 위한 세션 유효성 체크
     axios
       .get(`http://localhost:8080/api/validate`, {
         withCredentials: true, // 쿠키 전달을 위한 옵션 설정
@@ -226,6 +228,7 @@ const Header = () => {
               )}
             </S.Li>
             {isLogin ? (
+              // 세션 유효성이 확인된 경우 회원 전용 Header 아이템 생성
               <>
                 {isWriteMode ? (
                   ""
@@ -268,6 +271,7 @@ const Header = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
+                      // 로그아웃 수행
                       axios
                         .post(`http://localhost:8080/api/logout`, {}, { withCredentials: true })
                         .then((res) => {

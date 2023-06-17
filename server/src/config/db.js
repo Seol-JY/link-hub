@@ -1,3 +1,4 @@
+// 데이터베이스 설정 정보
 const mysql = require("mysql");
 
 const db = mysql.createConnection({

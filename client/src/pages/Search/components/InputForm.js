@@ -1,3 +1,4 @@
+// 검색 입력창 구성
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import queryString from "query-string";

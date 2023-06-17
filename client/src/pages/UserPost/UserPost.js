@@ -1,3 +1,4 @@
+// 특정 사용자 게시글 목록 조회
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";

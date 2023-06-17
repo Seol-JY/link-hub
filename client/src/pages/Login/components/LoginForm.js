@@ -81,6 +81,7 @@ const LoginForm = () => {
   }, []);
 
   const onSubmit = () => {
+    // 로그인 요청 전송
     if (email !== "" && password !== "") {
       axios
         .post(`http://localhost:8080/api/login`, { email, password }, { withCredentials: true })

@@ -1,4 +1,6 @@
 "use strict";
+
+// 서버 실행 코드
 const app = require("../app");
 const PORT = 8080;
 

@@ -1,3 +1,4 @@
+// 북마크 게시글 아이템 - 일반
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import AspectRatio from "@mui/joy/AspectRatio";

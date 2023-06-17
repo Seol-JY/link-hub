@@ -35,6 +35,7 @@ const App = () => {
           <BrowserRouter>
             <Header />
             <Routes>
+              {/* 화면 라우팅 */}
               <Route exact path="/" element={<Home />} />
               <Route path="search" element={<Search />} />
               <Route path="login" element={<Login />} />

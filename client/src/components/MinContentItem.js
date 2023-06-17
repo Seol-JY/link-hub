@@ -1,3 +1,4 @@
+// 북마크 게시글 아이템 - 소형 버전
 import Card from "@mui/joy/Card";
 import { useNavigate } from "react-router";
 import CardOverflow from "@mui/joy/CardOverflow";

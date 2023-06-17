@@ -1,3 +1,4 @@
+// 전역 스타일 지정
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 

@@ -80,6 +80,7 @@ const SignupForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = () => {
+    // 회원가입 요청 및 유효성 체크 로직
     if (email !== "" && username !== "" && password !== "" && passwordConfirm !== "") {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

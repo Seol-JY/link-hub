@@ -1,3 +1,4 @@
+// 북마크 게시글 작성 화면
 import { useState } from "react";
 import ContentAside from "./components/ContentAside";
 import Editor from "./components/Editor";

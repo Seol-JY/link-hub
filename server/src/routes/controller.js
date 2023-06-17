@@ -1,7 +1,9 @@
 const UserModel = require("../model/User");
 const PostModel = require("../model/Post");
 
+// 사용자 관련 controller
 const User = {
+  // 로그인
   login: async (req, res) => {
     const { email, password } = req.body;
     UserModel.getUserInfo(email, password)
@@ -23,6 +25,7 @@ const User = {
       });
   },
 
+  // 회원가입
   register: (req, res) => {
     const { email, username, password } = req.body;
     UserModel.setUserInfo(email, username, password)
@@ -43,6 +46,7 @@ const User = {
       });
   },
 
+  // 세션 유효성 검사
   validate: (req, res) => {
     if (req.session.userId) {
       UserModel.getUserInfoWithId(req.session.userId)
@@ -64,6 +68,7 @@ const User = {
     }
   },
 
+  // 로그아웃
   logout: (req, res) => {
     // Destroy the session
     req.session.destroy((err) => {
@@ -79,7 +84,9 @@ const User = {
   },
 };
 
+// 게시글 관련 controller
 const Post = {
+  // 북마크 게시글 저장
   savePost: (req, res) => {
     PostModel.createPost(req)
       .then((data) => {
@@ -92,6 +99,7 @@ const Post = {
           .json({ success: false, message: "Internal server error" });
       });
   },
+  // 북마크 게시글 상세 조회
   getPost: (req, res) => {
     PostModel.getPost(req)
       .then((data) => {
@@ -108,6 +116,8 @@ const Post = {
         }
       });
   },
+
+  // 북마크 게시글 목록 검색
   getPostWithSearch: (req, res) => {
     PostModel.getPostWithSearch(req)
       .then((data) => {
@@ -120,6 +130,8 @@ const Post = {
           .json({ success: false, message: "Internal server error" });
       });
   },
+
+  // 북마크 게시글 목록 사용자로 검색
   getPostWithUser: (req, res) => {
     PostModel.getPostWithUser(req)
       .then((data) => {
@@ -133,6 +145,7 @@ const Post = {
       });
   },
 
+  // 인기순 북마크 게시글 목록 조회
   getTrend: (req, res) => {
     PostModel.getTrend(req)
       .then((data) => {
@@ -146,6 +159,7 @@ const Post = {
       });
   },
 
+  // 최근 순 북마크 게시글 목록 조회
   getRecent: (req, res) => {
     PostModel.getRecent(req)
       .then((data) => {

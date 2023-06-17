@@ -1,3 +1,4 @@
+// 북마크 게시글 작성 화면 아래의 작성취소 및 완료 화면
 import styled from "styled-components";
 import Button from "@mui/joy/Button/Button";
 import { useNavigate } from "react-router-dom";

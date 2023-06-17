@@ -2,7 +2,9 @@ const { rejects } = require("assert");
 const db = require("../config/db");
 const fs = require("fs");
 
+// 게시글의 데이터베이스 접근 관련 로직
 const Post = {
+  // 북마크 게시글 생성
   createPost: async (req) => {
     return new Promise((resolve, reject) => {
       const userId = req.session.userId;
@@ -19,6 +21,7 @@ const Post = {
           else {
             const bookmarkId = results.insertId;
 
+            // 링크 item 등록
             data.link.map((link, index) => {
               if (link.description !== "" && link.url !== "") {
                 const query2 =
@@ -48,6 +51,7 @@ const Post = {
               }
             });
 
+            // 북마크 게시글 조회수 초기화
             const query4 =
               "INSERT INTO bookmark_view (bookmark_id, view_count) VALUES (?, ?)";
 
@@ -62,7 +66,9 @@ const Post = {
       );
     });
   },
+
   getPost: async (req) => {
+    // 게시글 상세 조회
     return new Promise((resolve, reject) => {
       const { username, bookmarkId } = req.query;
       const sql = `
@@ -82,8 +88,10 @@ const Post = {
           reject("server error");
         } else {
           if (results.length === 0) {
+            // 게시글이 존재하지 않는 경우
             reject("No Exist");
           } else {
+            // 게시글이 존재하면 게시글 object 생성
             const post = {
               created_at: results[0].created_at,
               title: results[0].title,
@@ -120,6 +128,7 @@ const Post = {
   },
 
   getPostWithSearch: async (req) => {
+    // 게시글 검색 기능
     return new Promise((resolve, reject) => {
       const { q } = req.query;
       const sql = `
@@ -175,6 +184,7 @@ const Post = {
   },
 
   getPostWithUser: async (req) => {
+    // 사용자명으로 게시글 목록을 가지고옴
     return new Promise((resolve, reject) => {
       const { q } = req.query;
       const sql = `
@@ -224,7 +234,9 @@ const Post = {
       });
     });
   },
+
   getRecent: async (req) => {
+    // 날짜순 내림차순 정렬 게시글 목록 가져오기  (limit 제공)
     return new Promise((resolve, reject) => {
       const { limit } = req.query;
       const sql = `
@@ -266,7 +278,9 @@ const Post = {
       });
     });
   },
+
   getTrend: async (req) => {
+    // 조회수순 오름차순 정렬 게시글 목록 가져오기  (limit 제공)
     return new Promise((resolve, reject) => {
       const { limit } = req.query;
       const sql = `

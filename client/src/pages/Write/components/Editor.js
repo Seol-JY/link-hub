@@ -1,3 +1,4 @@
+// 북마크 게시글 작성 화면
 import { useDropzone } from "react-dropzone";
 import Stack from "@mui/joy/Stack";
 import Button from "@mui/joy/Button";
@@ -40,6 +41,7 @@ const Editor = ({ doSubmit, setDoSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  // 링크 요소 data
   const [items, setItems] = useState([
     {
       description: "", // 첫 번째 아이템에만 placeholder 적용
@@ -52,6 +54,7 @@ const Editor = ({ doSubmit, setDoSubmit }) => {
   ]);
 
   const onDrop = (acceptedFiles) => {
+    // 사진 첨부시 발동
     const reader = new FileReader();
     const file = acceptedFiles;
 

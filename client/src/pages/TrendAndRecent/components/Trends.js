@@ -59,6 +59,7 @@ const Trends = () => {
   const [resData, setResData] = useState(null);
 
   useEffect(() => {
+    // recent 및 trend에 따라 적절한 추천 게시물을 요청
     axios
       .get(`http://localhost:8080/api/${opt}`)
       .then((res) => {

@@ -1,3 +1,4 @@
+// 상대시간 출력을 위한 custom hook
 import { useEffect, useState } from "react";
 import moment from "moment";
 

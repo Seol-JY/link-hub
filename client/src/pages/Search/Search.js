@@ -36,6 +36,7 @@ const Search = () => {
   const [resData, setResData] = useState(null);
 
   useEffect(() => {
+    // 검색 키워드를 바탕으로 검색 수행
     if (q !== "" && q !== null)
       axios
         .get(`http://localhost:8080/api/search/?q=${q}`)
@@ -52,6 +53,7 @@ const Search = () => {
       <S.Container>
         <InputForm resData={resData} />
         <Stack spacing={0.3} divider={<Divider />}>
+          {/* 검색 결과를 게시글 아이템으로 출력 */}
           {resData && resData.map((RD) => <ContentItem key={RD.bookmarkId} data={RD} />)}
         </Stack>
       </S.Container>

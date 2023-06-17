@@ -1,3 +1,4 @@
+// 게시글 내 제목 이미지 설명 section
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";

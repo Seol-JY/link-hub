@@ -1,3 +1,4 @@
+// 게시글의 link 요소
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Button from "@mui/joy/Button";
 import Avatar from "@mui/joy/Avatar";
@@ -12,6 +13,7 @@ const LinkItem = ({ description, link }) => {
   const [faviconLink, setFaviconLink] = useState("");
 
   useEffect(() => {
+    // 링크 정보를 바탕으로 favicon 추출 및 세팅
     try {
       setUrl(new URL(link));
       setFaviconLink(`${url.protocol}//${url.hostname}/favicon.ico`);

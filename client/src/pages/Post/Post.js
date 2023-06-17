@@ -1,3 +1,4 @@
+// 게시글 본문 컴포넌트
 import View from "./components/View";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -11,6 +12,7 @@ const Post = () => {
   const formattedUser = user.startsWith("@") ? user.slice(1) : null;
 
   useEffect(() => {
+    // 사용자 이름과 bookmarkId를 통해서 내용 불러옴
     if (formattedUser !== null) {
       axios
         .get(`http://localhost:8080/api/post/?username=${formattedUser}&bookmarkId=${postId}`)
