@@ -2,6 +2,8 @@
 
 **데이터 베이스 텀 프로젝트**
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/52064ca3-aa27-4f38-bdc7-9e527750ef3a/deploy-status)](https://app.netlify.com/sites/frabjous-kataifi-d64ada/deploys)
+
 <img width="2548" alt="스크린샷 2023-06-10 오전 3 43 51" src="https://github.com/Seol-JY/link-hub/assets/70826982/4cb97509-61d0-4d44-817d-f25a82aeae96">
 <img width="2548" alt="스크린샷 2023-06-10 오전 3 27 25" src="https://github.com/Seol-JY/link-hub/assets/70826982/d3fda4b8-ca18-41d4-be4d-e4fba8ee627b">
 <img width="2548" alt="스크린샷 2023-06-10 오전 3 45 07" src="https://github.com/Seol-JY/link-hub/assets/70826982/78432c97-bbe9-4a70-a307-19eea7abf380">
