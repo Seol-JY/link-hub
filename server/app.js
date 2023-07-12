@@ -19,7 +19,7 @@ app.use(
 // cors 설정
 app.use(
   cors({
-    origin: "http://linkhub.seol.pro",
+    origin: "https://linkhub.seol.pro",
     credentials: true,
   })
 );

@@ -9,6 +9,7 @@ node_modules
 client/build
 
 # misc
+client/.env
 .DS_Store
 .env.local
 .env.development.local
