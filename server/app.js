@@ -8,21 +8,19 @@ const routes = require("./src/routes");
 
 const app = express();
 
-// cors 설정
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+const whitelist = ["http://localhost:3000", "https://linkhub.seol.pro"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not Allowed Origin!"));
+    }
+  },
+  credentials: true,
+};
 
-// cors 설정
-app.use(
-  cors({
-    origin: "https://linkhub.seol.pro",
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions)); // 옵션을 추가한 CORS 미들웨어 추가
 
 app.use(bodyParser.json());
 app.use(cookieParser());
