@@ -16,6 +16,14 @@ app.use(
   })
 );
 
+// cors 설정
+app.use(
+  cors({
+    origin: "http://linkhub.seol.pro",
+    credentials: true,
+  })
+);
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 

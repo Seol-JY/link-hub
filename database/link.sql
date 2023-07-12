@@ -23,9 +23,9 @@ CREATE TABLE bookmark (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users (id) 
+  FOREIGN KEY (users_id) REFERENCES users (id) 
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- bookmark_image 테이블
@@ -35,7 +35,7 @@ CREATE TABLE bookmark_image (
   img LONGBLOB,
   FOREIGN KEY (bookmark_id) REFERENCES bookmark (id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- link 테이블
@@ -46,7 +46,7 @@ CREATE TABLE link (
   link VARCHAR(255) NOT NULL,
   FOREIGN KEY (bookmark_id) REFERENCES bookmark (id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- bookmark_view 테이블
@@ -56,5 +56,5 @@ CREATE TABLE bookmark_view (
   view_count INT DEFAULT 0,
   FOREIGN KEY (bookmark_id) REFERENCES bookmark (id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
