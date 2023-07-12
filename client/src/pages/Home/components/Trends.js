@@ -64,7 +64,7 @@ const Trends = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/${opt}/?limit=3`)
+      .get(`http://${process.env.REACT_APP_API_HOST}/api/${opt}/?limit=3`)
       .then((res) => {
         setResData(res.data);
       })

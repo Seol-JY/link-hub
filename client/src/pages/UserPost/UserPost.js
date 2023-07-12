@@ -39,7 +39,7 @@ const UserPost = () => {
   useEffect(() => {
     if (formattedUser !== null) {
       axios
-        .get(`http://localhost:8080/api/search/user/?q=${formattedUser}`)
+        .get(`http://${process.env.REACT_APP_API_HOST}/api/search/user/?q=${formattedUser}`)
         .then((res) => {
           setResData(res.data);
         })

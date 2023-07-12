@@ -95,7 +95,7 @@ const SignupForm = () => {
       }
 
       axios
-        .post(`http://localhost:8080/api/register`, { email, username, password })
+        .post(`http://${process.env.REACT_APP_API_HOST}/api/register`, { email, username, password })
         .then((res) => {
           if (res.data.success) {
             setIsRegisterSuccess(true);

@@ -86,7 +86,7 @@ const Hero = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/validate`, {
+      .get(`http://${process.env.REACT_APP_API_HOST}/api/validate`, {
         withCredentials: true, // 쿠키 전달을 위한 옵션 설정
       })
       .then((res) => {
