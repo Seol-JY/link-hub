@@ -141,7 +141,7 @@ const Header = () => {
   useEffect(() => {
     // 로그인 여부 확인을 위한 세션 유효성 체크
     axios
-      .get(`http://${process.env.REACT_APP_API_HOST}/api/validate`, {
+      .get(`${process.env.REACT_APP_API_HOST}/api/validate`, {
         withCredentials: true, // 쿠키 전달을 위한 옵션 설정
       })
       .then((res) => {
@@ -273,7 +273,7 @@ const Header = () => {
                     onClick={() => {
                       // 로그아웃 수행
                       axios
-                        .post(`http://${process.env.REACT_APP_API_HOST}/api/logout`, {}, { withCredentials: true })
+                        .post(`${process.env.REACT_APP_API_HOST}/api/logout`, {}, { withCredentials: true })
                         .then((res) => {
                           if (res.data.success) {
                             window.location.reload();

@@ -67,7 +67,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     axios
-      .get(`http://${process.env.REACT_APP_API_HOST}/api/validate`, {
+      .get(`${process.env.REACT_APP_API_HOST}/api/validate`, {
         withCredentials: true, // 쿠키 전달을 위한 옵션 설정
       })
       .then((res) => {
@@ -84,7 +84,7 @@ const LoginForm = () => {
     // 로그인 요청 전송
     if (email !== "" && password !== "") {
       axios
-        .post(`http://${process.env.REACT_APP_API_HOST}/api/login`, { email, password }, { withCredentials: true })
+        .post(`${process.env.REACT_APP_API_HOST}/api/login`, { email, password }, { withCredentials: true })
         .then((res) => {
           if (res.data.success) {
             window.location.reload();

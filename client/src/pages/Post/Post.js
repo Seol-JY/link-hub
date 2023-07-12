@@ -15,7 +15,7 @@ const Post = () => {
     // 사용자 이름과 bookmarkId를 통해서 내용 불러옴
     if (formattedUser !== null) {
       axios
-        .get(`http://${process.env.REACT_APP_API_HOST}/api/post/?username=${formattedUser}&bookmarkId=${postId}`)
+        .get(`${process.env.REACT_APP_API_HOST}/api/post/?username=${formattedUser}&bookmarkId=${postId}`)
         .then((res) => {
           setLoadStatus("loaded");
           setResData(res);

@@ -118,7 +118,7 @@ const Editor = ({ doSubmit, setDoSubmit }) => {
     formData.append("data", JSON.stringify(data));
 
     axios
-      .post(`http://${process.env.REACT_APP_API_HOST}/api/post`, formData, { withCredentials: true })
+      .post(`${process.env.REACT_APP_API_HOST}/api/post`, formData, { withCredentials: true })
       .then((res) => {
         if (res.data.success) {
           navigate("/");

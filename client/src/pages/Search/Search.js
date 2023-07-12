@@ -39,7 +39,7 @@ const Search = () => {
     // 검색 키워드를 바탕으로 검색 수행
     if (q !== "" && q !== null)
       axios
-        .get(`http://${process.env.REACT_APP_API_HOST}api/search/?q=${q}`)
+        .get(`${process.env.REACT_APP_API_HOST}api/search/?q=${q}`)
         .then((res) => {
           setResData(res.data);
         })
